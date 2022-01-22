@@ -16,12 +16,10 @@ public class MainMenu extends GUIState {
 
     private static final String[] options = {" NEW GAME", "   OPTIONS", "QUIT  GAME"};
     private static final File background = new File("src/main/resources/menu/img/MenuBG.jpg");
-    private static final File menuMusic = new File("src/main/resources/menu/sounds/THE BATMAN Main Music.wav");
 
     private static int currentChoice = 0;
 
     private BufferedImage backgroundImage;
-    private Clip clip;
 
     public MainMenu(GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
@@ -31,12 +29,7 @@ public class MainMenu extends GUIState {
     public void init() {
         try {
             backgroundImage = ImageIO.read(background);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(menuMusic);
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-            clip.loop(2147483647);
-        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -72,7 +65,7 @@ public class MainMenu extends GUIState {
     private int selectMenuOption() {
         if(currentChoice == 0){
             //GUIStateManager.setStates(GUIStateManager.STORY);
-            clip.stop();
+            GUIStateManager.getClip().stop();
         }
 
         if (currentChoice == 1) {
