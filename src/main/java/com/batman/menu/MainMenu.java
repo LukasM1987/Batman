@@ -5,7 +5,9 @@ import com.batman.engine.GUIStateManager;
 import com.batman.engine.GameEngine;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -68,7 +70,13 @@ public class MainMenu extends GUIState {
         if(currentChoice == 0){
             GUIStateManager.getClip().stop();
             initBatsSound();
-            //GUIStateManager.setStates(GUIStateManager.STORY);
+            GUIStateManager.setStates(GUIStateManager.INTRODUCTION);
+            try {
+                Thread.sleep(7990);
+                System.exit(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         if (currentChoice == 1) {
@@ -117,7 +125,6 @@ public class MainMenu extends GUIState {
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
-            Thread.sleep(7990);
         } catch (Exception e) {
             e.printStackTrace();
         }

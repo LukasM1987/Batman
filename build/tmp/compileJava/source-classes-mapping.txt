@@ -8,6 +8,8 @@ com/batman/engine/GameEngine.java
  com.batman.engine.GameEngine
 com/batman/engine/Frame.java
  com.batman.engine.Frame
+com/batman/menu/Introduction.java
+ com.batman.menu.Introduction
 com/batman/engine/GUIStateManager.java
  com.batman.engine.GUIStateManager
 com/batman/menu/MainMenu.java

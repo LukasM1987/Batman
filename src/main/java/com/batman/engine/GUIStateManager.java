@@ -1,6 +1,7 @@
 package com.batman.engine;
 
 import com.batman.menu.Help;
+import com.batman.menu.Introduction;
 import com.batman.menu.MainMenu;
 
 import javax.sound.sampled.*;
@@ -16,9 +17,9 @@ public class GUIStateManager {
     private final List<GUIState> gamesStates = new ArrayList<>();
     private static final File menuMusic = new File("src/main/resources/menu/sounds/THE BATMAN Main Music.wav");
 
-
     public static final int MENU = 0;
     public static final int HELP = 1;
+    public static final int INTRODUCTION = 2;
 
     private Clip clip;
     private int currentState;
@@ -28,6 +29,7 @@ public class GUIStateManager {
         playMainMenuMusic();
         gamesStates.add(new MainMenu(this));
         gamesStates.add(new Help(this));
+        gamesStates.add(new Introduction(this));
 
     }
 
