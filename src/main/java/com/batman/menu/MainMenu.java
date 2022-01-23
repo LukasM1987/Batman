@@ -16,10 +16,12 @@ public class MainMenu extends GUIState {
 
     private static final String[] options = {" NEW GAME", "   OPTIONS", "QUIT  GAME"};
     private static final File background = new File("src/main/resources/menu/img/MenuBG.jpg");
+    private static final File batsSound = new File("src/main/resources/menu/sounds/bats.wav");
 
     private static int currentChoice = 0;
 
     private BufferedImage backgroundImage;
+    private Clip clip;
 
     public MainMenu(GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
@@ -64,8 +66,9 @@ public class MainMenu extends GUIState {
 
     private int selectMenuOption() {
         if(currentChoice == 0){
-            //GUIStateManager.setStates(GUIStateManager.STORY);
             GUIStateManager.getClip().stop();
+            initBatsSound();
+            //GUIStateManager.setStates(GUIStateManager.STORY);
         }
 
         if (currentChoice == 1) {
@@ -84,14 +87,14 @@ public class MainMenu extends GUIState {
             selectMenuOption();
         }
 
-        if (key.getKeyCode() == KeyEvent.VK_UP || key.getKeyCode() == KeyEvent.VK_W) {
+        if (key.getKeyCode() == KeyEvent.VK_UP) {
             currentChoice--;
             if (currentChoice == -1) {
                 currentChoice = options.length - 1;
             }
         }
 
-        if (key.getKeyCode() == KeyEvent.VK_DOWN || key.getKeyCode() == KeyEvent.VK_S) {
+        if (key.getKeyCode() == KeyEvent.VK_DOWN) {
             currentChoice++;
             if (currentChoice == options.length) {
                 currentChoice = 0;
@@ -106,5 +109,17 @@ public class MainMenu extends GUIState {
 
     private void exitGame() {
         System.exit(0);
+    }
+
+    private void initBatsSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(batsSound);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            Thread.sleep(7990);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
